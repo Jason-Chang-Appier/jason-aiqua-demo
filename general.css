@@ -27,6 +27,8 @@
     left: 32%;
     border-radius: 5px;
     padding: 10px;
+    animation-name: createBox;
+    animation-duration: 0.5s; 
 }
 
 form input {
@@ -45,6 +47,15 @@ form input {
     cursor: pointer;
 }
 
+@keyframes createBox {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
 #modal_background {
     display: none;
     z-index: 1;
@@ -56,5 +67,6 @@ form input {
     width: 100%;
     overflow: hidden;
     opacity: 30%;
+
 }
 
