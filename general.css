@@ -29,6 +29,10 @@
     padding: 10px;
 }
 
+form input {
+    margin-bottom: 10px;
+}
+
 #product_modal img {
     display: block;
     margin-left: auto;
@@ -42,6 +46,7 @@
 }
 
 #modal_background {
+    display: none;
     z-index: 1;
     background-color: white;
     position: fixed;

@@ -43,11 +43,14 @@
             <div class="content">
                 <div id="close">X</div>
                 <div id="modal_pd_names">product name</div>
-                <img src="">
-
-                    <button type="button" class="btn btn-secondary">Purchase</button>
-                    <button type="button" class="btn btn-secondary">Add Cart</button>
-
+                <img id="modal_pd_image" src="">
+                <form>
+                    <label>User Email:</label>
+                    <input type="email" class="form-control" name="email" placeholder="email..." id="email">
+                    <button type="button" class="btn btn-primary" onclick="register()">register</button>
+                    <button type="button" class="btn btn-secondary" onclick="purchase()">Purchase</button>
+                    <button type="button" class="btn btn-secondary" onclick="addToCart()">Add Cart</button>
+                </form>
             </div>
         </div>
     </div>
@@ -96,6 +99,37 @@
                 modal.style.display = "block";
             });
         });
+
+        function register() {
+            usr_email = document.getElementById("email").value;
+
+            if (usr_email != "") {
+                qg("identify", {"email": usr_email});
+            } else {
+                alert("please enter the email");
+            }      
+        }
+
+        function purchase() {
+            product_name = document.getElementById("modal_pd_names").innerHTML;
+            product_image = document.getElementById("modal_pd_image").src;
+            // push events
+            qg("event", "checkout_completed", {
+                "product_name": product_name, 
+                "image": product_image
+            });
+        }
+
+        function addToCart() {
+            product_name = document.getElementById("modal_pd_names").innerHTML;
+            product_image = document.getElementById("modal_pd_image").src;
+            // push events
+            qg("event", "product_added_to_cart", {
+                "product_name": product_name, 
+                "image": product_image
+            });
+        }
+
 
     </script>
 
