@@ -1,6 +1,6 @@
 self.addEventListener('install', function(event) {
   event.waitUntil(
-    console.log("try to install v2 service worker!")
+    console.log("try to install v3 service worker!")
   );
 });
 
