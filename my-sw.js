@@ -6,7 +6,9 @@ self.addEventListener('install', function(event) {
 
 
 self.addEventListener('fetch', function(event) {
-  console.log('v1 SW fetch:', event.request.url);
+  if (event.request.url.include("https://aiqua-demo.herokuapp.com/")) {
+    console.log('v1 SW fetch:', event.request.url);
+  }
   //event.respondWith(new Response("request came from s2 v1"));
 });
 
