@@ -6,6 +6,11 @@ self.addEventListener('install', function(event) {
 
 
 self.addEventListener('activate', function(event) {
+  event.respondWith(new Response("request came from s2 v1"));
+});
+
+
+self.addEventListener('fetch', function(event) {
   event.waitUntil(
     console.log("try to activate v1 service worker!")
   );
