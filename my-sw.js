@@ -6,8 +6,8 @@ self.addEventListener('install', function(event) {
 
 
 self.addEventListener('fetch', function(event) {
-  if (event.request.url.indexOf("https://aiqua-demo.herokuapp.com/index.html") >= 0) {
-    console.log('v2 SW fetch:', event.request.url);
+  if (event.request.url.indexOf("https://aiqua-demo.herokuapp.com/") >= 0) {
+    console.log('v3 SW fetch:', event.request.url);
   }
   //event.respondWith(new Response("request came from s2 v1"));
 });
@@ -15,6 +15,6 @@ self.addEventListener('fetch', function(event) {
 
 self.addEventListener('activate', function(event) {
   event.waitUntil(
-    console.log("try to activate v2 service worker!")
+    console.log("try to activate v3 service worker!")
   );
 });
