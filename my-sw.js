@@ -6,8 +6,8 @@ self.addEventListener('install', function(event) {
 
 
 self.addEventListener('fetch', function(event) {
-  console.log('SW fetch:', event.request.url);
-  event.respondWith(new Response("request came from s2 v1"));
+  console.log('v1 SW fetch:', event.request.url);
+  //event.respondWith(new Response("request came from s2 v1"));
 });
 
 
