@@ -15,6 +15,7 @@
     </div>
 
     <div class="container">
+        <a href="/page2.html">page 2</a>
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
           <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -107,6 +108,16 @@
     </script>
 
     <script type="text/javascript">
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/my-sw.js', {scope: '/'}).then(function(reg) {
+                    // registration worked
+                    console.log('Registration succeeded. Scope is ' + reg.scope);
+            }).catch(function(error) {
+                // registration failed
+                console.log('Registration failed with ' + error);
+            });
+        }
+
         // add click listner to all of the product
         modal = document.getElementById('modal_background');
         modal.style.display = "none";
