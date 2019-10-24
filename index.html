@@ -10,7 +10,7 @@
 </head>
 <body>
     <div class="jumbotron">
-        <a href="googlechrome://navigate?url=www.hawooo.com/mobile/4th_birthday.aspx"><h1 class="display-4">AIQUA</h1></a>
+        <h1 class="display-4" onclick="openIntent()">AIQUA</h1>
         <p class="lead">Just try to embeded Aiqua's SDK in this </p>
     </div>
 
@@ -108,6 +108,18 @@
     </script>
 
     <script type="text/javascript">
+        function openIntent() {
+            String url = "https://www.hawooo.com/mobile/4th_birthday.aspx";
+            try {
+                Uri uri = Uri.parse("googlechrome://navigate?url=" + url);
+                Intent i = new Intent(Intent.ACTION_VIEW, uri);
+                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(i);
+            } catch (ActivityNotFoundException e) {
+                console.log("some error" + e);
+            }
+        }
+
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('/my-sw.js', {scope: '/'}).then(function(reg) {
                     // registration worked
