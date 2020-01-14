@@ -117,6 +117,11 @@
     </script>
 
     <script type="text/javascript">
+        window.qg('on', 'inWebOpened', function() {
+            document.querySelector('.please_change_me').src = "https://www.appier.com/wp-content/uploads/2018/09/appier-logo.jpg";
+        });
+
+
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('/my-sw.js', {scope: '/'}).then(function(reg) {
                     // registration worked
