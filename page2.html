@@ -12,8 +12,12 @@
             js.queue = [];
             p = g.createElement(r); p.async = !0; p.src = a; h = g.getElementsByTagName(r)[0];
             h.parentNode.insertBefore(p, h);
-        }(window, document, 'script', '//cdn.qgr.ph/qgraph.4b994f1dc2ea472df47d.js');
+        }(window, document, 'script', '//cdn.qgr.ph/qgraph.95125409e1db46a88c5c.js');
         qg("event", "page_view_two_viewed");
+        console.log("1.", window.qg.queue);
+        qg('on', 'initialize', () => {
+            console.log("2.", window.qg.queue);
+        });
     </script>
     <!-- AIQUA Push -->
 </head>
