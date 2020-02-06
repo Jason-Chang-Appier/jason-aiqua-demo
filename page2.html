@@ -14,6 +14,8 @@
             h.parentNode.insertBefore(p, h);
         }(window, document, 'script', '//cdn.qgr.ph/qgraph.95125409e1db46a88c5c.js');
         qg("event", "page_view_two_viewed");
+        qg("event", "product_viewed");
+        qg("event", "product_added_to_cart");
         console.log("1.", window.qg.queue.length);
         qg('on', 'initialize', () => {
             console.log("2.", window.qg.queue.length);
