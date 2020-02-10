@@ -10,25 +10,57 @@
         body {
             background-color: lightgrey;
         }
+        .sort{
+            cursor: pointer;
+        }
+        #resultBox {
+            margin-top: 20px;
+        }
+        .form-group {
+            width: 50%;
+        }
+        #loading {
+            display: none;
+        }
+        #warn {
+            display: none;
+            color: red;
+        }
+        #notFound {
+            display: none;
+        }
+        #error {
+            display: none;
+            color: red;
+        }
+        table {
+            table-layout: fixed;
+            font-size: 12px;
+        }
+        td {
+            white-space: pre-wrap;
+        }
     </style>
 </head>
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-4 mx-auto">
-                <h1>Search AIQUA Profile</h1>
+            <div class="col-sm-8 mx-auto">
+                <h1>Search User Profile</h1>
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-4 mx-auto">
-            	<form>
+            <div class="col-sm-8 mx-auto">
+                <form>
                     <div class="form-group">
                         <label for="app_id">APP ID:</label>
-                        <input class="form-control" placeholder="Enter APP ID" id="app_id">
+                        <input class="form-control" placeholder="Enter APP ID" id="app_id" required>
+                        <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
                     <div class="form-group">
                         <label for="pwd">API Token:</label>
-                        <input class="form-control" placeholder="Enter API Token" id="token">
+                        <input class="form-control" placeholder="Enter API Token" id="token" required>
+                        <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
                     <div class="form-group">
                         <label for="sel1">Select identifier:</label>
@@ -43,40 +75,125 @@
                     </div>
                     <div class="form-group">
                         <label for="pwd">Enter Identifier Value</label>
-                        <input class="form-control" placeholder="Enter Identifier Value" id="value">
+                        <input class="form-control" placeholder="Enter Identifier Value" id="value" required>
+                        <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
                 </form>
-                    <button type="submit" class="btn btn-primary" onclick="search();">Search</button>
+                    <button id="submit" type="submit" class="btn btn-primary" onclick="search();">Search</button>
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm-4 mx-auto">
+        <div class="row" id="resultBox">
+            <div class="col-sm-8 mx-auto">
                 <h1>Result</h1>
-                <div id="result"></div>
-            </div>
+                <span id="loading">loading...</span>
+                <span id="notFound">No user found.</span>
+                <span id="error"></span>
+                <span id="warn">Please fill out all the fields above.</span>
+                <div id="result">
+                    <table class="table table-dark table-striped" id="myTable">
+                        <thead>
+                            <tr>
+                                <th class="sort" style="width: 15%" onclick="sortTable(0);">userId</th>
+                                <th class="sort" style="width: 15%" onclick="sortTable(1);">mTime</th>
+                                <th style="width: 70%">value</th>
+                            </tr>
+                        </thead>
+                        <tbody id="content">
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
     <script type="text/javascript">
         function search() {
+            document.getElementById("notFound").style.display = "none";
+            document.getElementById("error").style.display = "none";
+            document.getElementById("content").innerHTML = "";
+            document.getElementById("warn").style.display = "none";
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
+                if (this.readyState == 1) {
+                    document.getElementById("loading").style.display = "block";
+                }
                 if (this.readyState == 4 && this.status == 200) {
-                  document.getElementById("result").innerHTML = this.responseText;
-                  console.log(this.responseText);
+                    document.getElementById("loading").style.display = "none";
+                    var data = JSON.parse(this.responseText).users;
+                    if (data.length > 0) {
+                        var final_content = "";
+                        for (var i=0; i < data.length; i++) {
+                            final_content += "<tr><td>";
+                            final_content += data[i].userId;
+                            final_content += "</td><td>";
+                            final_content += data[i].mTime;
+                            final_content += "</td><td>";
+                            final_content += JSON.stringify(data[i], undefined, 4);
+                            final_content += "</td></tr>";
+                        }
+                        document.getElementById("content").innerHTML = final_content;
+                        sortTable(1);
+                    } else {
+                        document.getElementById("notFound").style.display = "block";
+                    }
+                    // document.getElementById("result").innerHTML = this.responseText;
+                } else if (this.status == 400) {
+                    document.getElementById("loading").style.display = "none";
+                    var errorMsg = JSON.parse(this.responseText).message;
+                    document.getElementById("error").innerHTML = errorMsg;
+                    document.getElementById("error").style.display = "block";
                 }
             };
             var app_id = document.getElementById("app_id").value;
-            var token  = "Token " + document.getElementById("token").value;
+            var token_value = document.getElementById("token").value
+            var token  = "Token " + token_value;
             var select_menu = document.getElementById("identifier")
             var identifier = select_menu.options[select_menu.selectedIndex].text;
             var identifier_value = document.getElementById("value").value;
             var request_url = "https://api.qgraph.io/api/v3/users/?" + identifier.trim() + "=" + identifier_value;
+            if (app_id == "" || token_value == "" || identifier_value == "") {
+                document.getElementById("warn").style.display = "block";
+                return ""
+            } 
             console.log(app_id, token, request_url);
             xhttp.open("GET", request_url, true);
             xhttp.setRequestHeader("appid", app_id);
             xhttp.setRequestHeader("authorization", token);
             xhttp.send();
+        }
+        // define a function to sort the results
+        function sortTable(col) {
+            var table, rows, switching, i, x, y, shouldSwitch;
+            table = document.getElementById("myTable");
+            switching = true;
+            /*Make a loop that will continue until
+            no switching has been done:*/
+            while (switching) {
+                //start by saying: no switching is done:
+                switching = false;
+                rows = table.rows;
+                /*Loop through all table rows (except the
+                first, which contains table headers):*/
+                for (i = 1; i < (rows.length - 1); i++) {
+                    //start by saying there should be no switching:
+                    shouldSwitch = false;
+                    /*Get the two elements you want to compare,
+                    one from current row and one from the next:*/
+                    x = rows[i].getElementsByTagName("TD")[col];
+                    y = rows[i + 1].getElementsByTagName("TD")[col];
+                    //check if the two rows should switch place:
+                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                        //if so, mark as a switch and break the loop:
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+                if (shouldSwitch) {
+                  /*If a switch has been marked, make the switch
+                  and mark that a switch has been done:*/
+                  rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                  switching = true;
+                }
+            }
         }
     </script>
 </body>
