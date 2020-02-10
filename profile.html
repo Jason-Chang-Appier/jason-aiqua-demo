@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profile Search</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="general.css">
+    <style type="text/css">
+        body {
+            background-color: lightgrey;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-4 mx-auto">
+                <h1>Search AIQUA Profile</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 mx-auto">
+            	<form>
+                    <div class="form-group">
+                        <label for="app_id">APP ID:</label>
+                        <input class="form-control" placeholder="Enter APP ID" id="app_id">
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">API Token:</label>
+                        <input class="form-control" placeholder="Enter API Token" id="token">
+                    </div>
+                    <div class="form-group">
+                        <label for="sel1">Select identifier:</label>
+                        <select class="form-control" id="identifier">
+                            <option>userId</option>
+                            <option>user_id</option>
+                            <option>IDFA/ADID</option>
+                            <option>phoneNo</option>
+                            <option>Email</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary" onclick="search();">Search</button>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 mx-auto">
+                <h1>Result</h1>
+                <div id="result"></div>
+            </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        function search() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                console.log("get", this.status, this.readyState);
+                if (this.readyState == 4 && this.status == 200) {
+                  document.getElementById("result").innerHTML = this.responseText;
+                  console.log(this.responseText);
+                }
+            };
+            xhttp.open("GET", "https://api.qgraph.io/api/v3/users/", true);
+            console.log("send");
+            xhttp.send();
+        }
+    </script>
+</body>
