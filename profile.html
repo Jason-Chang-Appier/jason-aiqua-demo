@@ -73,7 +73,7 @@
             var identifier_value = document.getElementById("value").value;
             var request_url = "https://api.qgraph.io/api/v3/users/?" + identifier.trim() + "=" + identifier_value;
             console.log(app_id, token, request_url);
-            xhttp.open("GET", "https://api.qgraph.io/api/v3/users/", true);
+            xhttp.open("GET", request_url, true);
             xhttp.setRequestHeader("appid", app_id);
             xhttp.setRequestHeader("authorization", token);
             xhttp.send();
