@@ -35,13 +35,18 @@
                         <select class="form-control" id="identifier">
                             <option>userId</option>
                             <option>user_id</option>
-                            <option>IDFA/ADID</option>
+                            <option>IDFA</option>
+                            <option>AAID</option>
                             <option>phoneNo</option>
-                            <option>Email</option>
+                            <option>email</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary" onclick="search();">Search</button>
+                    <div class="form-group">
+                        <label for="pwd">Enter Identifier Value</label>
+                        <input class="form-control" placeholder="Enter Identifier Value" id="value">
+                    </div>
                 </form>
+                    <button type="submit" class="btn btn-primary" onclick="search();">Search</button>
             </div>
         </div>
         <div class="row">
@@ -56,14 +61,21 @@
         function search() {
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
-                console.log("get", this.status, this.readyState);
                 if (this.readyState == 4 && this.status == 200) {
                   document.getElementById("result").innerHTML = this.responseText;
                   console.log(this.responseText);
                 }
             };
+            var app_id = document.getElementById("app_id").value;
+            var token  = "Token " + document.getElementById("token").value;
+            var select_menu = document.getElementById("identifier")
+            var identifier = select_menu.options[select_menu.selectedIndex].text;
+            var identifier_value = document.getElementById("value").value;
+            var request_url = "https://api.qgraph.io/api/v3/users/?" + identifier.trim() + "=" + identifier_value;
+            console.log(app_id, token, request_url);
             xhttp.open("GET", "https://api.qgraph.io/api/v3/users/", true);
-            console.log("send");
+            xhttp.setRequestHeader("appid", app_id);
+            xhttp.setRequestHeader("authorization", token);
             xhttp.send();
         }
     </script>
