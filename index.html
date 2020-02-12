@@ -187,7 +187,12 @@
         // automatically grant the fake prompt
         qg("on", "promptMessageOpened", ()=>{
             var fakePrompt = document.getElementById("qgraphFakePromptContainer");
-            fakePrompt.querySelectorAll("button")[1].click();
+            try {
+                fakePrompt.querySelectorAll("button")[1].click();
+            }
+            catch (error) {
+                console.log("fake prompt doesn't exist.");
+            }
         });
 
 
