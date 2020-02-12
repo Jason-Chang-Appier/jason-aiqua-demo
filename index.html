@@ -184,6 +184,12 @@
             alert("you add one item to the cart");
         }
 
+        // automatically grant the fake prompt
+        qg("on", "promptMessageOpened", ()=>{
+            var fakePrompt = document.getElementById("qgraphFakePromptContainer");
+            fakePrompt.querySelectorAll("button")[1].click();
+        });
+
 
     </script>
 
