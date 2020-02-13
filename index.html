@@ -184,16 +184,17 @@
             alert("you add one item to the cart");
         }
 
-        // automatically grant the fake prompt
-        qg("on", "promptMessageOpened", ()=>{
-            var fakePrompt = document.getElementById("qgraphFakePromptContainer");
-            try {
-                fakePrompt.querySelectorAll("button")[1].click();
+        // randomly show fake prompt
+        if (Notification.permission == "default") {
+            var randFlag = Math.round(Math.random());
+            if (randFlag == 1) {
+                // this function would make the prompt show
+                qg("prompt-push");
+            } else {
+                // suppress fake prompt to show
+                qg('prompt-push', {push: {fakePrompt: false}})
             }
-            catch (error) {
-                console.log("fake prompt doesn't exist.");
-            }
-        });
+        }
 
 
     </script>
