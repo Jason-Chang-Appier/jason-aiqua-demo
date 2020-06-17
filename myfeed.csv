@@ -1,3 +1,7 @@
 id,availability,condition,title,color,description,image_link,link,price,brand,google_product_category,InventoryStatus,IsHot
 MT1M136CL317,in stock,new,MIT U領合身上衣,牙白,MIT舒適棉柔質料/ U領造型 / 袖型能修飾手臂,https://pic.pzcdn.tw/pazzo/ProductCover/1e2fedf5-ae03-4b86-87b5-7d5f209b8382.jpg,https://www.pazzo.com.tw/market/n/136?c=317,90.00 TWD,PAZZO,1604,N,N
 MT1M177CL420,in stock,new,方塊燙金字母上衣,麻灰,方塊燙金字母上衣，燙金印花字形，圓領棉質材質,https://pic.pzcdn.tw/pazzo/ProductCover/0b86d009-6367-4f0f-a9ba-86a21bf50456.jpg,https://www.pazzo.com.tw/market/n/177?c=420,200.00 TWD,PAZZO,1604,Y,N
+Macbook Pro,in stock,new,Macbook Pro,white,good,https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcST5dSUl3f58TqH1sNR_Mq0KYEQadw-pYXeBW_Z0xa-I3UgEPMqeQ,https://aiqua-demo.herokuapp.com/index.html,1000,Apple,123,yes,yes
+Macbook Pro,in stock,new,Macbook Pro,white,good,https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcST5dSUl3f58TqH1sNR_Mq0KYEQadw-pYXeBW_Z0xa-I3UgEPMqeQ,https://aiqua-demo.herokuapp.com/index.html,1000,Apple,123,yes,yes
+iPhone XS Max 256GB,in stock,new,iPhone XS Max 256GB,white,good,https://www.costco.com.tw/medias/sys_master/images/he9/hab/11354217087006.jpg,https://aiqua-demo.herokuapp.com/index.html,1000,Apple,123,yes,yes
+AirPod,in stock,new,AirPod,white,good,https://store.storeimages.cdn-apple.com/8755/as-images.apple.com/is/image/AppleInc/aos/published/images/M/ME/MMEF2/MMEF2?wid=572&hei=572&fmt=jpeg&qlt=95&op_usm=0.5,0.5&.v=1503962928226,https://aiqua-demo.herokuapp.com/index.html,1000,Apple,123,yes,yes
