@@ -22,14 +22,14 @@
             p = g.createElement(r); p.async = !0; p.src = a; h = g.getElementsByTagName(r)[0];
             h.parentNode.insertBefore(p, h);
         }(window, document, 'script', '//cdn.qgr.ph/qgraph.25c17fb106f98d7b5b17.js');
-        // qg("event", "page_view_two_viewed");
-        // qg("event", "product_viewed");
-        // qg("event", "product_added_to_cart");
-        // console.log("1.", window.qg.queue.length);
-        // qg('on', 'initialize', () => {
-        //     console.log("2.", window.qg.queue.length);
-        //     window.location.href = "https://aiqua-demo.herokuapp.com/index.html"
-        // });
+        qg("event", "page_view_two_viewed");
+        qg("event", "product_viewed");
+        qg("event", "product_added_to_cart");
+        console.log("1.", window.qg.queue.length);
+        qg('on', 'initialize', () => {
+            console.log("2.", window.qg.queue.length);
+            window.location.href = "https://aiqua-demo.herokuapp.com/index.html"
+        });
     </script>
 </head>
 <body>
