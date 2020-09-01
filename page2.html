@@ -25,10 +25,12 @@
         qg("event", "page_view_two_viewed");
         qg("event", "product_viewed");
         qg("event", "product_added_to_cart");
+        qg("identify", {"user_id": "test"})
         console.log("1.", window.qg.queue.length);
         qg('on', 'initialize', () => {
-            console.log("2.", window.qg.queue.length);
-            window.location.href = "https://aiqua-demo.herokuapp.com/index.html"
+            setTimeout(() => {
+                window.location.href = "https://docs.aiqua.appier.com/docs/creatives#image-type";
+            },200);
         });
     </script>
 </head>
