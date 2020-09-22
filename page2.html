@@ -25,7 +25,7 @@
         qg("event", "page_view_two_viewed");
         qg("event", "product_viewed");
         qg("event", "product_added_to_cart");
-        qg("identify", {"user_id": "test"})
+        qg("identify", {"user_id": "test"});
         console.log("1.", window.qg.queue.length);
         qg('on', 'initialize', () => {
             setTimeout(() => {
