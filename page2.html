@@ -22,15 +22,12 @@
             p = g.createElement(r); p.async = !0; p.src = a; h = g.getElementsByTagName(r)[0];
             h.parentNode.insertBefore(p, h);
         }(window, document, 'script', '//cdn.qgr.ph/qgraph.95125409e1db46a88c5c.js');
-        qg("event", "page_view_two_viewed");
-        qg("event", "product_viewed");
-        qg("event", "product_added_to_cart");
-        qg("identify", {"user_id": "test"});
+        qg("event", "redirection_test");
+        qg("identify", {"user_id": "test123"})
         console.log("1.", window.qg.queue.length);
-        qg('on', 'initialize', () => {
-            setTimeout(() => {
-                window.location.href = "https://aiqua-demo.herokuapp.com/index.html";
-            }, 10000);
+        qg('flushUserData', ()=>{
+            console.log('flush data');
+            window.location.href = "https://www.google.com/";
         });
     </script>
 </head>
