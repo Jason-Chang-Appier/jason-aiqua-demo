@@ -25,10 +25,12 @@
         qg("event", "redirection_test");
         qg("identify", {"user_id": "test123"})
         console.log("1.", window.qg.queue.length);
-        qg('flushUserData', ()=>{
+
+        setTimeout(function() {
+            qg('flushUserData', ()=>{
             console.log('flush data');
             window.location.href = "https://www.google.com/";
-        });
+        }, 2000});
     </script>
 </head>
 <body>
