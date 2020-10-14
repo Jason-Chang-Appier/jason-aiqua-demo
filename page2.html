@@ -26,12 +26,13 @@
         qg("identify", {"user_id": "test123"})
         console.log("1.", window.qg.queue.length);
 
-        setTimeout(function() {
-            qg('flushUserData', ()=>{
-                console.log('flush data');
-                window.location.href = "https://www.google.com/";
-            });
-        }, 3000);
+
+        qg('flushUserData', ()=>{
+            console.log('flush data');
+            document.cookie = "_qg_cm= ;Domain=.aiqua-demo.herokuapp.com;expires = Thu, 01 Jan 1970 00:00:00 GMT";
+            window.location.href = "/index.html";
+        });
+
     </script>
 </head>
 <body>
