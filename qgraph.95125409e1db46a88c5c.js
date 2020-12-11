@@ -3,7 +3,6 @@ window.QGSettings = {
   "debug": false,
   "vapidPublicKey": "BGHiV7y31Hm7oSM6h4WMqQu7zD2-WRKtbwG2vafFitgYgU6z0NCk12OEHTMe7UuPTwnIT83VIar0kzdo6VAF2ZI",
   "origin": "https://aiqua-demo.herokuapp.com",
-  "inWebEnabled": true,
   "push": {
     "secondsBetweenPrompts": 3600,
     "crossSitesEnabled": true
