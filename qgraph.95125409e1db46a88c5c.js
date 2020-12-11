@@ -26,4 +26,4 @@ if(window.qg && window.qg.queue) {
    h=g.getElementsByTagName(r)[0];
    h.parentNode.insertBefore(p,h);
    q.qg.initialized = true;
-}(window,document,'script','/aiqua-1.js');
+}(window,document,'script','/aiqua.js');
