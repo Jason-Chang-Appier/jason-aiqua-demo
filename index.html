@@ -140,12 +140,13 @@
         window.qg('on', 'inWebOpened', function() {
             console.log('in-web displayed!');
         });
-
-        window.qg('on', 'lineProfileReceived', function() {
-            alert('line profile synced');
-        })
-
-
+        if (window.location.href.includes('_lnchid')) {
+            window.qg('on', 'lineProfileReceived', function() {
+                alert('line profile synced');
+            });
+        } else {
+            console.log('no line profile sync needed');
+        }
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('/my-sw.js', {scope: '/'}).then(function(reg) {
                     // registration worked
