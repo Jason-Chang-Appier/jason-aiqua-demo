@@ -141,6 +141,10 @@
             console.log('in-web displayed!');
         });
 
+        window.qg('on', 'lineProfileReceived', function() {
+            alert('line profile synced');
+        })
+
 
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('/my-sw.js', {scope: '/'}).then(function(reg) {
