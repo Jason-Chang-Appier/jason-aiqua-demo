@@ -214,11 +214,13 @@
         // randomly show fake prompt
         if (Notification.permission == "default") {
             var randFlag = Math.round(Math.random());
+            console.log('manual prompt.')
             if (randFlag == 1) {
                 // this function would make the prompt show
                 qg("prompt-push");
             } else {
                 // suppress fake prompt to show
+                console.log('suppress fake prompt.');
                 qg('prompt-push', {push: {fakePrompt: false}})
             }
         }
