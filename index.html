@@ -90,25 +90,6 @@
         </div>
     </div>
 
-<!--     <script>
-        window.onload = function(){
-            qg('getAttribution', attr => {
-                var URL_list = [
-                  'https://aiqua-demo.herokuapp.com/index.html'
-                ];
-                if(attr){
-                    for(u in URL_list){
-                        var iframe = document.createElement('iframe');
-                        iframe.setAttribute('style','display:none;');
-                        if('notificationId' in attr && 'action' in attr && 'ts' in attr)
-                            iframe.src = URL_list[u] + '?aiqua_attr=' + attr['notificationId'] + '.' + attr['action'] + '.' + attr['ts']
-                        document.body.appendChild(iframe);
-                    }
-                }
-            });
-        };
-    </script> -->
-
     <!-- script importing -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
