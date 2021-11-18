@@ -1,3 +1,7 @@
+body {
+    background-color: lightgray;
+}
+
 #footer {
     display: inline;
     float: right;
@@ -57,14 +61,50 @@ form input {
 }
 
 #modal_background {
-    display: none;
     z-index: 1;
     background-color: white;
     position: fixed;
     top:0;
+    padding-top: 100px;
     background-color: rgba(0, 0, 0, 0.5);
     height: 100%;
     width: 100%;
     overflow: hidden;
 }
 
+.option {
+    list-style-type: none;
+    cursor: pointer;
+    color: royalblue;
+}
+
+.option:hover {
+    color: coral;
+}
+
+.show {
+    display: block;
+}
+
+.hide {
+    display: none;
+}
+
+.pagination {
+    text-align: center;
+}
+
+.pagination li{
+    display: inline;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.notFocused {
+    cursor: pointer;
+    color: royalblue;
+}
+
+.notFocused:hover {
+    color: coral;
+}
