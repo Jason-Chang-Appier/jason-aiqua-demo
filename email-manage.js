@@ -9,7 +9,7 @@ class Panel extends React.Component {
             appToken: '',
             unsubEmail: '',
             curPage: Array(),
-            pagination: 4,
+            pagination: 50,
             search: '',
         }
         this.handleAppId = this.handleAppId.bind(this);
