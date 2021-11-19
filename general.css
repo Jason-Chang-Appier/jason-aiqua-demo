@@ -98,6 +98,7 @@ form input {
     display: inline;
     align-items: center;
     margin-left: 10px;
+    float: right;
 }
 
 .notFocused {
