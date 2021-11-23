@@ -63,9 +63,14 @@ var Panel = function (_React$Component) {
         value: function handleSubmit(event) {
             var _this2 = this;
 
+            event.preventDefault();
             var unsubEmail = this.state.unsubEmail;
             var appId = this.state.appId;
             var token = 'Token ' + this.state.appToken;
+            if (!appId || !token) {
+                console.warn('You forgot to fill appId and token.');
+                return;
+            }
             if (unsubEmail !== '') {
                 console.log('insert new unsub email.' + unsubEmail);
                 var insertHttp = new XMLHttpRequest();
@@ -85,7 +90,6 @@ var Panel = function (_React$Component) {
             this.setState({
                 emailList: Array()
             });
-            event.preventDefault();
             var http = new XMLHttpRequest();
             var url = 'https://api.qgraph.io/api/v3/users/?unsubscribed=true';
             http.open("GET", url);
@@ -249,7 +253,7 @@ var Panel = function (_React$Component) {
                                 React.createElement(
                                     'label',
                                     { htmlFor: 'sendgridCred', className: 'form-label' },
-                                    'Sendgrid Token (Only add it when you want to resub in sendgrid as well)',
+                                    'Sendgrid Token',
                                     React.createElement('input', { type: 'text', value: this.state.sendgridCred, onChange: this.handleSendgridCred, className: 'form-control', id: 'sendgridCred' })
                                 )
                             ),
@@ -259,7 +263,22 @@ var Panel = function (_React$Component) {
                                 React.createElement(
                                     'label',
                                     { htmlFor: 'insertEmail', className: 'form-label' },
-                                    'Add unsub email',
+                                    React.createElement(
+                                        'div',
+                                        { className: 'tip' },
+                                        'Add unsub email',
+                                        React.createElement(
+                                            'span',
+                                            { className: 'tiptext' },
+                                            'Only add it when you want to resub/unsub for ',
+                                            React.createElement(
+                                                'b',
+                                                null,
+                                                'SendGrid'
+                                            ),
+                                            ' as well.'
+                                        )
+                                    ),
                                     React.createElement('input', { type: 'email', value: this.state.unsubEmail, onChange: this.handleInsert, className: 'form-control', id: 'unsubEmail' })
                                 )
                             ),
@@ -276,7 +295,7 @@ var Panel = function (_React$Component) {
                             React.createElement(
                                 'div',
                                 { className: 'form-group' },
-                                React.createElement('input', { className: 'btn btn-primary', type: 'submit', value: 'Submit' })
+                                React.createElement('input', { className: 'btn btn-primary', type: 'submit', value: 'Search' })
                             )
                         )
                     ),
@@ -354,7 +373,7 @@ var List = function (_React$Component2) {
 
             return React.createElement(
                 'table',
-                { className: 'table' },
+                { className: 'table table-dark table-striped table-hover' },
                 React.createElement(
                     'thead',
                     null,
