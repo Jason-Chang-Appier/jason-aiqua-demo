@@ -20,7 +20,7 @@ var Panel = function (_React$Component) {
             appToken: '',
             unsubEmail: '',
             curPage: Array(),
-            pagination: 25,
+            pagination: 50,
             search: '',
             sendgridCred: ''
         };
@@ -184,8 +184,7 @@ var Panel = function (_React$Component) {
             var displayEmail = this.state.emailList.slice(curPage.indexOf(true) * pagination, curPage.indexOf(true) * pagination + pagination);
             var starter = curPage.indexOf(true) * pagination;
 
-            // console.log('total page: ' + curPage.length);
-
+            var focusPage = curPage.indexOf(true);
             var pages = curPage.map(function (focus, i) {
                 var page = i + 1;
                 if (focus) {
@@ -195,13 +194,15 @@ var Panel = function (_React$Component) {
                         page
                     );
                 } else {
-                    return React.createElement(
-                        'li',
-                        { className: 'notFocused', key: i, onClick: function onClick() {
-                                return _this3.swicthPage(i);
-                            } },
-                        page
-                    );
+                    if (i >= focusPage - 2 && i <= focusPage + 2) {
+                        return React.createElement(
+                            'li',
+                            { className: 'notFocused', key: i, onClick: function onClick() {
+                                    return _this3.swicthPage(i);
+                                } },
+                            page
+                        );
+                    }
                 }
             });
 
