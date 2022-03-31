@@ -88,6 +88,10 @@
                         <input class="form-control" placeholder="Enter Identifier Value" id="value" required>
                         <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
+                    <div class="form-group">
+                        <label for="pwd">Enter filtered fields</label>
+                        <input class="form-control" placeholder="Enter filtered fields (e.g. user_id,name,gender)" id="fields">
+                    </div>
                 </form>
                     <button id="submit" type="submit" class="btn btn-primary" onclick="search();">Search</button>
             </div>
@@ -105,6 +109,7 @@
                             <tr>
                                 <th class="sort" style="width: 15%" onclick="sortTable(0);">userId</th>
                                 <th class="sort" style="width: 15%" onclick="sortTable(1);">mTime</th>
+                                <th class="sort" style="width: 15%" onclick="sortTable(2);">platform</th>
                                 <th style="width: 70%">value</th>
                             </tr>
                         </thead>
@@ -133,9 +138,11 @@
                         var final_content = "";
                         for (var i=0; i < data.length; i++) {
                             final_content += "<tr><td>";
-                            final_content += data[i].userId;
+                            final_content += data[i].userId.toString();
                             final_content += "</td><td>";
                             final_content += data[i].mTime;
+                            final_content += "</td><td>";
+                            final_content += data[i].platform;
                             final_content += "</td><td>";
                             final_content += JSON.stringify(data[i], undefined, 4);
                             final_content += "</td></tr>";
@@ -159,7 +166,11 @@
             var select_menu = document.getElementById("identifier")
             var identifier = select_menu.options[select_menu.selectedIndex].text;
             var identifier_value = document.getElementById("value").value;
-            var request_url = "https://api.qgraph.io/api/v3/users/?" + identifier.trim() + "=" + identifier_value;
+            var fields = document.getElementById("fields").value;
+            var request_url = "https://api.qgraph.io/api/v3/users/?" + identifier.trim() + "=" + identifier_value
+            if (fields !== '') {
+                request_url += '&fields=userId,mTime,' + fields;
+            }
             if (app_id == "" || token_value == "" || identifier_value == "") {
                 document.getElementById("warn").style.display = "block";
                 return ""
