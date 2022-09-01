@@ -13,7 +13,7 @@
         h4 {
           flex-basis: 100%;
         }
-        span {
+        #result span {
           /* overflow: visible; */
           color: grey;
           display: none;
@@ -52,8 +52,9 @@
         <input type="text" name="app_id" value="82f39aa90174145014f9">
         <label>scenario id:</label>
         <input type="text" name="sce_id" value="3yngfVZN3S5ZTwQ65aB7Pf">
-        <label>userId</label><span>separate by comma for multiple users.</span>
+        <label>userId</label>
         <input type="text" name="userIds" value="4658595032179218">
+        <span style="color: red; font-size: 15px">separate by comma for multiple users.</span>
         <input type="submit" name="submit">
     </form>
     <div id='result'></div>
@@ -91,7 +92,7 @@
           xhttp.open("GET", "https://aiqua-intel.prd.c.appier.net/api/v1.0/app/" + app_id + "/scenarios/" + sce_id + "/recommendation?uid=" + userId, false);
           xhttp.send();
         }
-        
+
         function render(e) {
             // clean previous result 
             const elem = document.querySelector('#result');
