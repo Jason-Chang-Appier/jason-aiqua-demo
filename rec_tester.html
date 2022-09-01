@@ -91,13 +91,17 @@
           xhttp.open("GET", "https://aiqua-intel.prd.c.appier.net/api/v1.0/app/" + app_id + "/scenarios/" + sce_id + "/recommendation?uid=" + userId, false);
           xhttp.send();
         }
+        
         function render(e) {
+            // clean previous result 
+            const elem = document.querySelector('#result');
+            elem.innerHTML = '';
             console.log('Rendering rec results.');
             event.preventDefault();
             // change the app_id and scenario id for your test
-            let app_id = document.querySelector('input[name="app_id"]').value; // 82f39aa90174145014f9
-            let sce_id = document.querySelector('input[name="sce_id"]').value; // 3yngfVZN3S5ZTwQ65aB7Pf
-            let userIds = document.querySelector('input[name="userIds"]').value;
+            const app_id = document.querySelector('input[name="app_id"]').value; // 82f39aa90174145014f9
+            const sce_id = document.querySelector('input[name="sce_id"]').value; // 3yngfVZN3S5ZTwQ65aB7Pf
+            const userIds = document.querySelector('input[name="userIds"]').value;
             userIds.split(',').forEach((userId) => {
                 loadDoc(userId, app_id, sce_id);
             });
