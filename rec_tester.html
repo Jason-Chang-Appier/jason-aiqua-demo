@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Rec Tester</title>
+    <style type="text/css">
+        @keyframes focus {
+          from {}
+          to {opacity: 60%;}
+        }
+
+        h4 {
+          flex-basis: 100%;
+        }
+        span {
+          /* overflow: visible; */
+          color: grey;
+          display: none;
+        }
+        .wrapper {
+          /* margin: 3px; */
+          flex: 0 0 12%;
+          min-width: 120px;
+          min-height: 120px;
+          max-width: 120px;
+          max-height: 120px;
+          cursor: pointer;
+          background-size: cover;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        .wrapper:hover {
+          animation-name: focus;
+          animation-duration: 0.5s;
+          animation-fill-mode: forwards;
+        }
+
+        #result {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          align-items: stretch;
+        }
+
+    </style>
+</head>
+<body>
+    <form onsubmit="return render(event);">
+        <label>app id:</label>
+        <input type="text" name="app_id" value="82f39aa90174145014f9">
+        <label>scenario id:</label>
+        <input type="text" name="sce_id" value="3yngfVZN3S5ZTwQ65aB7Pf">
+        <label>userId</label><span>separate by comma for multiple users.</span>
+        <input type="text" name="userIds" value="4658595032179218">
+        <input type="submit" name="submit">
+    </form>
+    <div id='result'></div>
+    <script type="text/javascript">
+
+        function loadDoc(userId, app_id, sce_id) { 
+          const xhttp = new XMLHttpRequest();
+          const elem = document.querySelector('#result');
+          var title = document.createElement('h4');
+          title.innerHTML = userId;
+          elem.appendChild(title);
+          xhttp.onload = function() {
+            var result = JSON.parse(this.responseText);
+            var items = result['items'];
+            items.forEach((item) => {
+                var div = document.createElement("div");
+              div.className = 'wrapper';
+              div.style.backgroundImage = 'url(' + item['image'] + ')';
+              var alg = document.createElement("span");
+              alg.innerHTML = item['alg'];
+              div.appendChild(alg);
+              div.onclick = () => {window.open(
+                item['url'],
+                '_blank' // <- This is what makes it open in a new window.
+              );}
+                     div.addEventListener('mouseover', (e)=> {
+                e.target.querySelector('span').style.display='block';
+              });
+              div.addEventListener('mouseleave', (e)=> {
+                e.target.querySelector('span').style.display='none';
+              });
+              elem.appendChild(div);
+            });
+          }
+          xhttp.open("GET", "https://aiqua-intel.prd.c.appier.net/api/v1.0/app/" + app_id + "/scenarios/" + sce_id + "/recommendation?uid=" + userId, false);
+          xhttp.send();
+        }
+        function render(e) {
+            console.log('Rendering rec results.');
+            event.preventDefault();
+            // change the app_id and scenario id for your test
+            let app_id = document.querySelector('input[name="app_id"]').value; // 82f39aa90174145014f9
+            let sce_id = document.querySelector('input[name="sce_id"]').value; // 3yngfVZN3S5ZTwQ65aB7Pf
+            let userIds = document.querySelector('input[name="userIds"]').value;
+            userIds.split(',').forEach((userId) => {
+                loadDoc(userId, app_id, sce_id);
+            });
+        }
+        
+    </script>
+</body>
+</html>
