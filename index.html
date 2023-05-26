@@ -110,6 +110,11 @@
     --> 
 
     <script type="text/javascript">
+
+        BB.get('userId', id => {
+            qg('identify', {'web_chat_id': id});
+        });
+
         window.qg('on', 'inWebOpened', function() {
             console.log('in-web displayed!');
         });
